@@ -1,6 +1,9 @@
 {
   "name": "cognitable",
   "version": "0.0.2-BETA",
+  "scripts": {
+    "publish": "ng build cognitable && npm publish"
+  },
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0"

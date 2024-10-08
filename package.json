@@ -1,12 +1,16 @@
 {
   "name": "cognitable",
-  "version": "0.0.1",
+  "version": "0.0.2-BETA",
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cognitable/cognitable"
   },
   "sideEffects": false
 }

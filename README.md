@@ -1,24 +1,85 @@
-# Cognitable
+# Cognitable - Angular Datatable
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
 
-## Code scaffolding
+## Recommended Platforms to Use
+1. Angular >= 18
 
-Run `ng generate component component-name --project cognitable` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project cognitable`.
-> Note: Don't forget to add `--project cognitable` or else it will be added to the default project in your `angular.json` file. 
+## Install Cognitable using NPM
 
-## Build
+```shell
+npm install cognitable
+```
 
-Run `ng build cognitable` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Start using Cognitable
 
-## Publishing
+### HTML
+```html
+<cognitable #cognitable
+            [tableHeaders]="headers"
+            [paginationEnabled]="true"
+            (cellContentClicked)="clicked($event)"
+></cognitable>
+```
 
-After building your library with `ng build cognitable`, go to the dist folder `cd dist/cognitable` and run `npm publish`.
+### Component Class
 
-## Running unit tests
+#### Get Reference of the Table
+Any further operations will be done using this
+```typescript
+@ViewChild('cognitable') cognitable: CognitableComponent | undefined;
+```
 
-Run `ng test cognitable` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Declaring Headers
+This can be directly given in the HTML attribute
 
-## Further help
+```typescript
+headers: TableHeader[] = [
+    {
+        title: 'Supplier Name',
+        field: 'supplierName',
+        sort: {
+            enabled: true
+        },
+        styles: {
+            cellStyles: {
+                color: '#1E40AE',
+                cursor: 'pointer'
+            }
+        }
+    },
+    {
+        title: 'Supplier Type',
+        field: 'supplierType'
+    },
+    {
+        title: 'Address',
+        field: 'address'
+    },
+    {
+        title: 'Status',
+        field: 'status',
+        type: 'DROPDOWN',
+        renderer: {
+            component: StatusDropdownComponent
+        }
+    }
+];
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+#### Set Data to the table
+
+```typescript
+this.cognitable?.setTableData(data);
+```
+
+#### Search over the whole data in the table
+
+```typescript
+this.cognitable?.filter(this.searchText);
+```
+
+## REMEMBER
+This library is on its birth stage, we will be adding more updates very soon on the go.
+
+You are welcomed to contribute more into it on https://github.com/cognitable/cognitable

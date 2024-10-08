@@ -1,6 +1,6 @@
 {
   "name": "cognitable",
-  "version": "0.0.9-BETA",
+  "version": "0.0.10-BETA",
   "scripts": {
     "publish": "ng build cognitable && cd dist/cognitable && npm publish"
   },

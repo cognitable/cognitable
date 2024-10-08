@@ -14,6 +14,8 @@ export declare class CognitableComponent extends TableInstance {
     cellContentClicked: EventEmitter<any>;
     cellContentHover: EventEmitter<any>;
     tableInstance: TableInstance;
+    loading: boolean;
+    noData: boolean;
     constructor();
     init(): void;
     setTableHeaders(tableHeaders?: TableHeader[]): void;

@@ -57,6 +57,9 @@ export class CognitableComponent extends TableInstance {
 
   public tableInstance: TableInstance = this;
 
+  override loading: boolean = false;
+  override noData: boolean = false;
+
   constructor() {
     super();
     setTimeout(() => {

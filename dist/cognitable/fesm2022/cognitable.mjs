@@ -249,6 +249,8 @@ class CognitableComponent extends TableInstance {
     cellContentClicked = new EventEmitter();
     cellContentHover = new EventEmitter();
     tableInstance = this;
+    loading = false;
+    noData = false;
     constructor() {
         super();
         setTimeout(() => {

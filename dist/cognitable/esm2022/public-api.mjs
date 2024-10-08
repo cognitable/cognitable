@@ -1,0 +1,11 @@
+/*
+ * Public API Surface of cognitable
+ */
+export * from './lib/cognitable.service';
+export * from './lib/cognitable.component';
+// Commons
+export * from './lib/commons/exportables/table-instance';
+export * from './lib/commons/models/table-header';
+export * from './lib/commons/models/table-styles';
+export * from './lib/commons/table/table-base';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9wdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztHQUVHO0FBRUgsY0FBYywwQkFBMEIsQ0FBQztBQUN6QyxjQUFjLDRCQUE0QixDQUFDO0FBRTNDLFVBQVU7QUFDVixjQUFjLDBDQUEwQyxDQUFDO0FBQ3pELGNBQWMsbUNBQW1DLENBQUM7QUFDbEQsY0FBYyxtQ0FBbUMsQ0FBQztBQUNsRCxjQUFjLGdDQUFnQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBjb2duaXRhYmxlXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9saWIvY29nbml0YWJsZS5zZXJ2aWNlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2NvZ25pdGFibGUuY29tcG9uZW50JztcblxuLy8gQ29tbW9uc1xuZXhwb3J0ICogZnJvbSAnLi9saWIvY29tbW9ucy9leHBvcnRhYmxlcy90YWJsZS1pbnN0YW5jZSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9jb21tb25zL21vZGVscy90YWJsZS1oZWFkZXInO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvY29tbW9ucy9tb2RlbHMvdGFibGUtc3R5bGVzJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2NvbW1vbnMvdGFibGUvdGFibGUtYmFzZSc7Il19

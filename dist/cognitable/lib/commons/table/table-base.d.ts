@@ -1,0 +1,31 @@
+import { TableHeader } from '../models/table-header';
+import { EventEmitter } from '@angular/core';
+export declare class TableBase {
+    tableHeaders: TableHeader[] | undefined;
+    tableData: any;
+    backupData: any;
+    paginationEnabled: boolean;
+    allowedPageSizes: number[];
+    pageSize: number;
+    totalPages: number;
+    currentPage: number;
+    paginationButtons: any[];
+    cellContentClicked: EventEmitter<any>;
+    cellContentHover: EventEmitter<any>;
+    height: number;
+    loading: boolean;
+    noData: boolean;
+    loadingMessage: string;
+    noDataMessage: string;
+    constructor();
+    setBackupData(data: any): void;
+    sort(field: string, order: string | undefined): void;
+    filter(filterValue: any, headers?: TableHeader[]): void;
+    filterByAllFields(filterValue: any): void;
+    filterBySpecifiedFields(filterValue: any, headers?: TableHeader[]): void;
+    loadPagination(): void;
+    changePagination(page: any): void;
+    getCurrentPageData(): any;
+    setLoading(loading: boolean): void;
+    setNoData(loading: boolean): void;
+}

@@ -26,6 +26,12 @@ export class TableBase {
     // Table Size
     height: number = 400;
 
+    // Overlays
+    loading: boolean = false;
+    noData: boolean = false;
+    loadingMessage!: string;
+    noDataMessage!: string;
+
     constructor() { }
 
     setBackupData(data: any) {
@@ -99,5 +105,13 @@ export class TableBase {
             return this.backupData.slice(pageStartIndex, pageStartIndex + this.pageSize);
         }
         return [];
+    }
+
+    setLoading(loading: boolean) {
+        this.loading = loading;
+    }
+
+    setNoData(loading: boolean) {
+        this.loading = loading;
     }
 }

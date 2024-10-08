@@ -7,6 +7,19 @@
                 </th>
             </thead>
             <tbody class="cognitable-data-body" [style]="'height: ' + (height - 44) + 'px' ">
+
+                <div class="cognitable-table-overlay" *ngIf="loading">
+                    <div class="cognitable-table-loader-overlay">
+                        {{loadingMessage}}
+                    </div>
+                </div>
+
+                <div class="cognitable-table-overlay" *ngIf="noData">
+                    <div class="cognitable-table-loader-overlay">
+                        {{noDataMessage}}
+                    </div>
+                </div>
+
                 <tr class="cognitable-data-row" *ngFor="let rowData of tableData; let i = index;">
                     <td *ngFor="let header of tableHeaders; let i = index;">
                         <cogintable-data-cell [tableInstance]="tableInstance" [header]="header" [cellData]="rowData[header.field]" [rowData]="rowData" *ngIf="!header.hidden"></cogintable-data-cell>

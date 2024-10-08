@@ -1,5 +1,3 @@
-import {Component} from '@angular/core';
-
 export interface TableHeader {
   /**
    * title will be displayed in the table headers

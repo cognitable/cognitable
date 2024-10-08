@@ -43,6 +43,12 @@ export class CognitableComponent extends TableInstance {
   @Input()
   override height = 400;
 
+  @Input()
+  override loadingMessage: string = 'Loading...';
+
+  @Input()
+  override noDataMessage: string = 'No Data';
+
   @Output()
   override cellContentClicked = new EventEmitter();
 

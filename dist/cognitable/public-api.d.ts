@@ -1,11 +1,5 @@
-/*
- * Public API Surface of cognitable
- */
-
 export * from './lib/cognitable.service';
 export * from './lib/cognitable.component';
-
-// Commons
 export * from './lib/commons/exportables/table-instance';
 export * from './lib/commons/models/table-header';
 export * from './lib/commons/models/table-styles';

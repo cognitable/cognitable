@@ -27,5 +27,5 @@ export declare class TableBase {
     changePagination(page: any): void;
     getCurrentPageData(): any;
     setLoading(loading: boolean): void;
-    setNoData(loading: boolean): void;
+    setNoData(noData: boolean): void;
 }

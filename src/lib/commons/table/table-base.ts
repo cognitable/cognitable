@@ -111,7 +111,7 @@ export class TableBase {
         this.loading = loading;
     }
 
-    setNoData(loading: boolean) {
-        this.loading = loading;
+    setNoData(noData: boolean) {
+        this.noData = noData;
     }
 }

@@ -105,8 +105,8 @@ class TableBase {
     setLoading(loading) {
         this.loading = loading;
     }
-    setNoData(loading) {
-        this.loading = loading;
+    setNoData(noData) {
+        this.noData = noData;
     }
 }
 

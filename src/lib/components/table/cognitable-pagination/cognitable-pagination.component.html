@@ -1,0 +1,63 @@
+<div class="cognitable-pagination-container">
+    <div class="cognitable-pagination-button-group">
+        <div (click)="previousPage()" class="cognitable-pagination-previous-button">
+            <div class="cognitable-pagination-previous-button-content">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.04529 11.6383C8.92341 11.6383 8.80154 11.5977 8.72029 11.4961L4.12966 6.82422C3.94685 6.64141 3.94685 6.35703 4.12966 6.17422L8.72029 1.50234C8.9031 1.31953 9.18748 1.31953 9.37029 1.50234C9.5531 1.68516 9.5531 1.96953 9.37029 2.15234L5.10466 6.49922L9.3906 10.8461C9.57341 11.0289 9.57341 11.3133 9.3906 11.4961C9.26873 11.5773 9.16716 11.6383 9.04529 11.6383Z" fill="#637381"/>
+                </svg>
+            </div>
+        </div>
+        <div class="cognitable-pagination-label-button" *ngIf="tableInstance!.currentPage <= 3 || tableInstance!.currentPage >= tableInstance!.totalPages - 2">
+            <div class="cognitable-pagination-label-button-content">
+                &nbsp;
+            </div>
+        </div>
+        <div (click)="goToPage(1)" class="cognitable-pagination-number-button" [ngClass]="{'active': tableInstance!.currentPage === 1}" *ngIf="tableInstance!.totalPages > 0">
+            <div class="cognitable-pagination-number-button-content">
+                1
+            </div>
+        </div>
+        <div (click)="goToPage(2)" class="cognitable-pagination-number-button" [ngClass]="{'active': tableInstance!.currentPage === 2}" *ngIf="tableInstance!.totalPages > 1 && tableInstance!.currentPage < (tableInstance!.pageSize / 2)">
+            <div class="cognitable-pagination-number-button-content">
+                2
+            </div>
+        </div>
+        <div class="cognitable-pagination-label-button" *ngIf="tableInstance!.totalPages > 4 && tableInstance!.currentPage !== 3">
+            <div class="cognitable-pagination-label-button-content">
+                ..
+            </div>
+        </div>
+        <div class="cognitable-pagination-number-button active" *ngIf="tableInstance!.totalPages > 4 && tableInstance!.currentPage > 2 && !([1, 2, tableInstance!.totalPages, tableInstance!.totalPages - 1].includes(tableInstance!.currentPage))">
+            <div class="cognitable-pagination-number-button-content">
+                {{tableInstance!.currentPage}}
+            </div>
+        </div>
+        <div class="cognitable-pagination-label-button" *ngIf="tableInstance!.totalPages > 4 && tableInstance!.currentPage > 2 && tableInstance!.currentPage < tableInstance!.totalPages - 2">
+            <div class="cognitable-pagination-label-button-content">
+                ..
+            </div>
+        </div>
+        <div (click)="goToPage(tableInstance!.totalPages - 1)" class="cognitable-pagination-number-button" [ngClass]="{'active': tableInstance!.currentPage === tableInstance!.totalPages - 1}" *ngIf="tableInstance!.totalPages > 1 && (tableInstance!.currentPage >= (tableInstance!.pageSize / 2) || tableInstance!.totalPages - 1 < 4) && !([1, 2].includes(tableInstance!.totalPages - 1))">
+            <div class="cognitable-pagination-number-button-content">
+                {{tableInstance!.totalPages - 1}}
+            </div>
+        </div>
+        <div (click)="goToPage(tableInstance!.totalPages)" class="cognitable-pagination-number-button"  [ngClass]="{'active': tableInstance!.currentPage === tableInstance!.totalPages}" *ngIf="tableInstance!.totalPages && !([1, 2].includes(tableInstance!.totalPages))">
+            <div class="cognitable-pagination-number-button-content">
+                {{tableInstance!.totalPages}}
+            </div>
+        </div>
+        <div class="cognitable-pagination-label-button" *ngIf="tableInstance!.currentPage < 3 || !(tableInstance!.currentPage <= tableInstance!.totalPages - 2)">
+            <div class="cognitable-pagination-label-button-content">
+                &nbsp;
+            </div>
+        </div>
+        <div (click)="nextPage()" class="cognitable-pagination-next-button">
+            <div class="cognitable-pagination-next-button-content">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.45466 11.6383C4.33279 11.6383 4.23123 11.5977 4.12966 11.5164C3.94685 11.3336 3.94685 11.0492 4.12966 10.8664L8.39529 6.49922L4.12966 2.15234C3.94685 1.96953 3.94685 1.68516 4.12966 1.50234C4.31248 1.31953 4.59685 1.31953 4.77966 1.50234L9.37029 6.17422C9.5531 6.35703 9.5531 6.64141 9.37029 6.82422L4.77966 11.4961C4.69841 11.5773 4.57654 11.6383 4.45466 11.6383Z" fill="#637381"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>

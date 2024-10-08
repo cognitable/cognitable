@@ -1,0 +1,16 @@
+<div style="display: flex;">
+  <div style="width: 20px; height: 100%; display: flex; align-items: center;">
+    <div style="width: 15px; height: 15px;">&nbsp;</div> <!-- Space for Checkbox, Numbers, Etc -->
+  </div>
+
+  <div class="cognitable-data-cell" [style]="header?.styles?.cellStyles">
+    <div class="cognitable-data-cell-content" [style]="header?.styles?.cellContentStyles" (click)="click()">
+        <ng-container *ngIf="!header?.renderer?.component">{{cellData}}</ng-container>
+        <ng-container *ngIf="header?.renderer?.component" #componentRenderer></ng-container>
+    </div>
+  </div>
+
+  <div style="width: 20px; height: 100%; display: flex; align-items: center;">
+    <div style="width: 15px; height: 15px;">&nbsp;</div> <!-- Space to sync with sort in the header, can be used for anything useful -->
+  </div>
+</div>

@@ -1,0 +1,100 @@
+.cognitable-pagination-container {
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.cognitable-pagination-button-group {
+    margin-left: auto;
+    margin-right: 15px;
+    display: flex;
+    gap: 10px;
+
+    button {
+        border-radius: 4px;
+    }
+}
+
+.cognitable-pagination-number-button {
+    border: none;
+    padding: 10px;
+    background: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+
+    &:hover {
+        background: #4338C9;
+        color: #FFFFFF;
+    }
+
+    &.active {
+        background: #4338C9;
+        color: #FFFFFF;
+    }
+}
+
+.cognitable-pagination-number-button-content {
+    width: 14px;
+    height: 14px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 15px;
+}
+
+.cognitable-pagination-previous-button {
+    border: none;
+    padding: 10px;
+    background: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cognitable-pagination-previous-button-content {
+    width: 14px;
+    height: 14px;
+}
+
+.cognitable-pagination-next-button {
+    border: none;
+    padding: 10px;
+    background: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cognitable-pagination-next-button-content {
+    width: 14px;
+    height: 14px;
+}
+
+.cognitable-pagination-label-button {
+    border: none;
+    padding: 10px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cognitable-pagination-label-button-content {
+    width: 14px;
+    height: 14px;
+}

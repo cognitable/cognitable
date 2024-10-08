@@ -1,0 +1,19 @@
+.cognitable-data-cell {
+    width: 150px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.cognitable-data-cell-content {
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+
+    /*Text Wrapping*/
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}

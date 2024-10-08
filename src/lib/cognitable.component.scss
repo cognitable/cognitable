@@ -1,0 +1,48 @@
+.cognitable-container {
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.cognitable-table-container {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.cognitable {
+  width: 100%;
+}
+
+.cognitable-header-row {
+  display: block;
+  width: 100%;
+  background: #F7F9FB;
+  border-bottom: 1px solid #CAD4E0;
+}
+
+.cognitable-header-cell-container {
+  display: inline-block;
+  height: 100%;
+}
+
+.cognitable-header-cell {
+  min-width: 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.cognitable-data-body {
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.cognitable-data-row {
+  width: 100%;
+  display: inline-block;
+  border-bottom: 1px solid #E1E7EF;
+}

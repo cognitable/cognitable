@@ -1,8 +1,8 @@
 {
   "name": "cognitable",
-  "version": "0.0.15-BETA",
+  "version": "0.0.16-BETA",
   "scripts": {
-    "publish": "ng build cognitable && cd dist/cognitable && npm publish && git add . && git commit -m \"Published\" && git push -u && cd ../../ && git add . && git commit -m \"Published\" && git push -u"
+    "publish": "ng build cognitable && cd dist/cognitable && npm publish && git add . && git commit -m \"Published\" && git push -u"
   },
   "peerDependencies": {
     "@angular/common": "^18.2.0",

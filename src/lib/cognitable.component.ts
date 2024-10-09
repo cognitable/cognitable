@@ -58,6 +58,9 @@ export class CognitableComponent extends TableInstance implements AfterViewInit 
   @Output()
   override cellContentHover = new EventEmitter();
 
+  @Output()
+  override cellValueChanged = new EventEmitter();
+
   public tableInstance: TableInstance = this;
 
   override loading: boolean = false;

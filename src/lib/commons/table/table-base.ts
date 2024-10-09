@@ -22,9 +22,10 @@ export class TableBase {
     currentPage = 1;
     paginationButtons: any[] = [];
 
-    // Table Action Events
+    // Cell Events
     public cellContentClicked = new EventEmitter();
     public cellContentHover = new EventEmitter();
+    public cellValueChanged = new EventEmitter();
 
     // Table Size
     height: number = 400;
@@ -36,6 +37,15 @@ export class TableBase {
     noDataMessage!: string;
 
     constructor() { }
+
+    changeCellValue(header: TableHeader, rowData: any, value: any) {
+        rowData[header.field] = value;
+        this.cellValueChanged.emit({
+            header: header,
+            rowData: rowData,
+            value: value
+        });
+    }
 
     setBackupData(data: any) {
         this.backupData = JSON.parse(JSON.stringify(data ?? []))

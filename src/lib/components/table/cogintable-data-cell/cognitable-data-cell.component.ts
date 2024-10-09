@@ -40,8 +40,6 @@ export class CognitableDataCellComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    if (this.header?.renderer?.componentName?.length) {
-    }
   }
 
   ngAfterViewInit() {
@@ -49,6 +47,8 @@ export class CognitableDataCellComponent implements OnInit, AfterViewInit {
       this.container.clear();
       const componentRef = this.container.createComponent(this.header?.renderer?.component)
       if (componentRef?.instance) {
+        // @ts-ignore
+        componentRef.instance['tableInstance'] = this.tableInstance;
         // @ts-ignore
         componentRef.instance['additionalData'] = this.header?.renderer?.additionalData;
         // @ts-ignore

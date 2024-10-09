@@ -14,6 +14,7 @@ export declare class CognitableComponent extends TableInstance implements AfterV
     afterTableInit: EventEmitter<TableInstance>;
     cellContentClicked: EventEmitter<any>;
     cellContentHover: EventEmitter<any>;
+    cellValueChanged: EventEmitter<any>;
     tableInstance: TableInstance;
     loading: boolean;
     noData: boolean;
@@ -24,5 +25,5 @@ export declare class CognitableComponent extends TableInstance implements AfterV
     setTableData(tableData?: any): void;
     private initiatePagination;
     static ɵfac: i0.ɵɵFactoryDeclaration<CognitableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<CognitableComponent, "cognitable", never, { "tableHeaders": { "alias": "tableHeaders"; "required": false; }; "tableData": { "alias": "tableData"; "required": false; }; "paginationEnabled": { "alias": "paginationEnabled"; "required": false; }; "allowedPageSizes": { "alias": "allowedPageSizes"; "required": false; }; "pageSize": { "alias": "pageSize"; "required": false; }; "height": { "alias": "height"; "required": false; }; "loadingMessage": { "alias": "loadingMessage"; "required": false; }; "noDataMessage": { "alias": "noDataMessage"; "required": false; }; }, { "afterTableInit": "afterTableInit"; "cellContentClicked": "cellContentClicked"; "cellContentHover": "cellContentHover"; }, never, never, true, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CognitableComponent, "cognitable", never, { "tableHeaders": { "alias": "tableHeaders"; "required": false; }; "tableData": { "alias": "tableData"; "required": false; }; "paginationEnabled": { "alias": "paginationEnabled"; "required": false; }; "allowedPageSizes": { "alias": "allowedPageSizes"; "required": false; }; "pageSize": { "alias": "pageSize"; "required": false; }; "height": { "alias": "height"; "required": false; }; "loadingMessage": { "alias": "loadingMessage"; "required": false; }; "noDataMessage": { "alias": "noDataMessage"; "required": false; }; }, { "afterTableInit": "afterTableInit"; "cellContentClicked": "cellContentClicked"; "cellContentHover": "cellContentHover"; "cellValueChanged": "cellValueChanged"; }, never, never, true, never>;
 }

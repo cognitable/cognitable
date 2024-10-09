@@ -13,12 +13,14 @@ export declare class TableBase {
     paginationButtons: any[];
     cellContentClicked: EventEmitter<any>;
     cellContentHover: EventEmitter<any>;
+    cellValueChanged: EventEmitter<any>;
     height: number;
     loading: boolean;
     noData: boolean;
     loadingMessage: string;
     noDataMessage: string;
     constructor();
+    changeCellValue(header: TableHeader, rowData: any, value: any): void;
     setBackupData(data: any): void;
     sort(field: string, order: string | undefined): void;
     filter(filterValue: any, headers?: TableHeader[]): void;

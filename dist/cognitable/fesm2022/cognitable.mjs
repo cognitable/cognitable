@@ -29,9 +29,10 @@ class TableBase {
     totalPages = 0;
     currentPage = 1;
     paginationButtons = [];
-    // Table Action Events
+    // Cell Events
     cellContentClicked = new EventEmitter();
     cellContentHover = new EventEmitter();
+    cellValueChanged = new EventEmitter();
     // Table Size
     height = 400;
     // Overlays
@@ -40,6 +41,14 @@ class TableBase {
     loadingMessage;
     noDataMessage;
     constructor() { }
+    changeCellValue(header, rowData, value) {
+        rowData[header.field] = value;
+        this.cellValueChanged.emit({
+            header: header,
+            rowData: rowData,
+            value: value
+        });
+    }
     setBackupData(data) {
         this.backupData = JSON.parse(JSON.stringify(data ?? []));
     }
@@ -202,14 +211,14 @@ class CognitableDataCellComponent {
         this.viewContainerRef = viewContainerRef;
     }
     ngOnInit() {
-        if (this.header?.renderer?.componentName?.length) {
-        }
     }
     ngAfterViewInit() {
         if (this.container && this.header?.renderer?.component) {
             this.container.clear();
             const componentRef = this.container.createComponent(this.header?.renderer?.component);
             if (componentRef?.instance) {
+                // @ts-ignore
+                componentRef.instance['tableInstance'] = this.tableInstance;
                 // @ts-ignore
                 componentRef.instance['additionalData'] = this.header?.renderer?.additionalData;
                 // @ts-ignore
@@ -261,6 +270,7 @@ class CognitableComponent extends TableInstance {
     afterTableInit = new EventEmitter();
     cellContentClicked = new EventEmitter();
     cellContentHover = new EventEmitter();
+    cellValueChanged = new EventEmitter();
     tableInstance = this;
     loading = false;
     noData = false;
@@ -293,7 +303,7 @@ class CognitableComponent extends TableInstance {
         }
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: CognitableComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.5", type: CognitableComponent, isStandalone: true, selector: "cognitable", inputs: { tableHeaders: "tableHeaders", tableData: "tableData", paginationEnabled: "paginationEnabled", allowedPageSizes: "allowedPageSizes", pageSize: "pageSize", height: "height", loadingMessage: "loadingMessage", noDataMessage: "noDataMessage" }, outputs: { afterTableInit: "afterTableInit", cellContentClicked: "cellContentClicked", cellContentHover: "cellContentHover" }, usesInheritance: true, ngImport: i0, template: "<div class=\"cognitable-container\">\n    <div class=\"cognitable-table-container\">\n        <table class=\"cognitable\">\n            <thead class=\"cognitable-header-row\" style=\"height: 44px\">\n                <th class=\"cognitable-header-cell-container\" *ngFor=\"let header of tableHeaders\">\n                    <cognitable-header-cell [tableInstance]=\"tableInstance\" [header]=\"header\"></cognitable-header-cell>\n                </th>\n            </thead>\n            <tbody class=\"cognitable-data-body\" [style]=\"'height: ' + (height - 44) + 'px' \">\n\n                <div class=\"cognitable-table-overlay\" *ngIf=\"loading\">\n                    <div class=\"cognitable-table-loader-overlay\">\n                        {{loadingMessage}}\n                    </div>\n                </div>\n\n                <div class=\"cognitable-table-overlay\" *ngIf=\"noData\">\n                    <div class=\"cognitable-table-loader-overlay\">\n                        {{noDataMessage}}\n                    </div>\n                </div>\n\n                <tr class=\"cognitable-data-row\" *ngFor=\"let rowData of tableData; let i = index;\">\n                    <td *ngFor=\"let header of tableHeaders; let i = index;\">\n                        <cogintable-data-cell [tableInstance]=\"tableInstance\" [header]=\"header\" [cellData]=\"rowData[header.field]\" [rowData]=\"rowData\" *ngIf=\"!header.hidden\"></cogintable-data-cell>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n\n    <ng-container *ngIf=\"paginationEnabled\">\n        <lib-cognitable-pagination [tableInstance]=\"tableInstance\"></lib-cognitable-pagination>\n    </ng-container>\n</div>\n", styles: [".cognitable-container{width:100%;font-family:Arial,Helvetica,sans-serif;display:flex;flex-direction:column}.cognitable-table-container{width:100%;display:flex;overflow-x:auto;overflow-y:hidden}.cognitable{width:100%}.cognitable-header-row{display:block;width:100%;background:#f7f9fb;border-bottom:1px solid #CAD4E0;white-space:nowrap}.cognitable-header-cell-container{display:inline-block;height:100%}.cognitable-header-cell{min-width:150px;padding-top:10px;padding-bottom:10px}.cognitable-data-body{display:block;overflow-y:auto;overflow-x:hidden;width:100%;position:relative}.cognitable-data-row{width:100%;display:inline-block;border-bottom:1px solid #E1E7EF;position:relative}.cognitable-action-data-cell{position:absolute;right:0;top:0;bottom:0;margin:0;z-index:1}.cognitable-table-overlay{position:absolute;inset:0;width:100%;background:#fff;display:flex;align-items:center;justify-content:center}.cognitable-table-loader-overlay{border:1px solid #b1afaf;color:#393939;border-radius:5px;padding:2px 10px;font-size:14px}\n"], dependencies: [{ kind: "directive", type: NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: CognitablePaginationComponent, selector: "lib-cognitable-pagination", inputs: ["tableInstance"] }, { kind: "component", type: CognitableHeaderCellComponent, selector: "cognitable-header-cell", inputs: ["header", "tableInstance"] }, { kind: "component", type: CognitableDataCellComponent, selector: "cogintable-data-cell", inputs: ["header", "cellData", "rowData", "tableInstance"] }] });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.5", type: CognitableComponent, isStandalone: true, selector: "cognitable", inputs: { tableHeaders: "tableHeaders", tableData: "tableData", paginationEnabled: "paginationEnabled", allowedPageSizes: "allowedPageSizes", pageSize: "pageSize", height: "height", loadingMessage: "loadingMessage", noDataMessage: "noDataMessage" }, outputs: { afterTableInit: "afterTableInit", cellContentClicked: "cellContentClicked", cellContentHover: "cellContentHover", cellValueChanged: "cellValueChanged" }, usesInheritance: true, ngImport: i0, template: "<div class=\"cognitable-container\">\n    <div class=\"cognitable-table-container\">\n        <table class=\"cognitable\">\n            <thead class=\"cognitable-header-row\" style=\"height: 44px\">\n                <th class=\"cognitable-header-cell-container\" *ngFor=\"let header of tableHeaders\">\n                    <cognitable-header-cell [tableInstance]=\"tableInstance\" [header]=\"header\"></cognitable-header-cell>\n                </th>\n            </thead>\n            <tbody class=\"cognitable-data-body\" [style]=\"'height: ' + (height - 44) + 'px' \">\n\n                <div class=\"cognitable-table-overlay\" *ngIf=\"loading\">\n                    <div class=\"cognitable-table-loader-overlay\">\n                        {{loadingMessage}}\n                    </div>\n                </div>\n\n                <div class=\"cognitable-table-overlay\" *ngIf=\"noData\">\n                    <div class=\"cognitable-table-loader-overlay\">\n                        {{noDataMessage}}\n                    </div>\n                </div>\n\n                <tr class=\"cognitable-data-row\" *ngFor=\"let rowData of tableData; let i = index;\">\n                    <td *ngFor=\"let header of tableHeaders; let i = index;\">\n                        <cogintable-data-cell [tableInstance]=\"tableInstance\" [header]=\"header\" [cellData]=\"rowData[header.field]\" [rowData]=\"rowData\" *ngIf=\"!header.hidden\"></cogintable-data-cell>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n\n    <ng-container *ngIf=\"paginationEnabled\">\n        <lib-cognitable-pagination [tableInstance]=\"tableInstance\"></lib-cognitable-pagination>\n    </ng-container>\n</div>\n", styles: [".cognitable-container{width:100%;font-family:Arial,Helvetica,sans-serif;display:flex;flex-direction:column}.cognitable-table-container{width:100%;display:flex;overflow-x:auto;overflow-y:hidden}.cognitable{width:100%}.cognitable-header-row{display:block;width:100%;background:#f7f9fb;border-bottom:1px solid #CAD4E0;white-space:nowrap}.cognitable-header-cell-container{display:inline-block;height:100%}.cognitable-header-cell{min-width:150px;padding-top:10px;padding-bottom:10px}.cognitable-data-body{display:block;overflow-y:auto;overflow-x:hidden;width:100%;position:relative}.cognitable-data-row{width:100%;display:inline-block;border-bottom:1px solid #E1E7EF;position:relative}.cognitable-action-data-cell{position:absolute;right:0;top:0;bottom:0;margin:0;z-index:1}.cognitable-table-overlay{position:absolute;inset:0;width:100%;background:#fff;display:flex;align-items:center;justify-content:center}.cognitable-table-loader-overlay{border:1px solid #b1afaf;color:#393939;border-radius:5px;padding:2px 10px;font-size:14px}\n"], dependencies: [{ kind: "directive", type: NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: CognitablePaginationComponent, selector: "lib-cognitable-pagination", inputs: ["tableInstance"] }, { kind: "component", type: CognitableHeaderCellComponent, selector: "cognitable-header-cell", inputs: ["header", "tableInstance"] }, { kind: "component", type: CognitableDataCellComponent, selector: "cogintable-data-cell", inputs: ["header", "cellData", "rowData", "tableInstance"] }] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: CognitableComponent, decorators: [{
             type: Component,
@@ -326,6 +336,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.5", ngImpor
             }], cellContentClicked: [{
                 type: Output
             }], cellContentHover: [{
+                type: Output
+            }], cellValueChanged: [{
                 type: Output
             }] } });
 

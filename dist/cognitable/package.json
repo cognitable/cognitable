@@ -1,6 +1,6 @@
 {
   "name": "cognitable",
-  "version": "0.0.13-BETA",
+  "version": "0.0.0-watch+1728485073942",
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0"
@@ -12,18 +12,6 @@
     "type": "git",
     "url": "https://github.com/cognitable/cognitable"
   },
-  "keywords": [
-    "table",
-    "data table",
-    "datatable",
-    "angular",
-    "grid",
-    "data grid",
-    "datagrid",
-    "angular table",
-    "angular grid",
-    "angular component"
-  ],
   "sideEffects": false,
   "module": "fesm2022/cognitable.mjs",
   "typings": "index.d.ts",

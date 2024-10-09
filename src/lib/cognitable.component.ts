@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
 import {TableHeader} from './commons/models/table-header';
 import {NgForOf, NgIf, NgStyle} from '@angular/common';
 import {TableInstance} from './commons/exportables/table-instance';
@@ -24,7 +24,7 @@ import {
   templateUrl: './cognitable.component.html',
   styleUrl: './cognitable.component.scss'
 })
-export class CognitableComponent extends TableInstance {
+export class CognitableComponent extends TableInstance implements AfterViewInit {
   @Input()
   override tableHeaders: Array<TableHeader> = [];
 
@@ -50,6 +50,9 @@ export class CognitableComponent extends TableInstance {
   override noDataMessage: string = 'No Data';
 
   @Output()
+  override afterTableInit = new EventEmitter<TableInstance>();
+
+  @Output()
   override cellContentClicked = new EventEmitter();
 
   @Output()
@@ -65,6 +68,10 @@ export class CognitableComponent extends TableInstance {
     setTimeout(() => {
       this.init();
     }, 100);
+  }
+
+  ngAfterViewInit() {
+    this.afterTableInit.emit(this);
   }
 
   init() {

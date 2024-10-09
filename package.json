@@ -15,5 +15,8 @@
     "type": "git",
     "url": "https://github.com/cognitable/cognitable"
   },
+  "keywords": [
+    "table", "data table", "datatable", "angular", "grid", "data grid", "datagrid", "angular table", "angular grid", "angular component"
+  ],
   "sideEffects": false
 }

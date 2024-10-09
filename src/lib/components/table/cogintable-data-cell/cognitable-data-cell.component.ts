@@ -45,9 +45,19 @@ export class CognitableDataCellComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (this.container) {
+    if (this.container && this.header?.renderer?.component) {
       this.container.clear();
-      this.container.createComponent(this.header?.renderer?.component)
+      const componentRef = this.container.createComponent(this.header?.renderer?.component)
+      if (componentRef?.instance) {
+        // @ts-ignore
+        componentRef.instance['additionalData'] = this.header?.renderer?.additionalData;
+        // @ts-ignore
+        componentRef.instance['header'] = this.header;
+        // @ts-ignore
+        componentRef.instance['rowData'] = this.rowData;
+        // @ts-ignore
+        componentRef.instance['cellData'] = this.cellData;
+      }
     }
   }
 

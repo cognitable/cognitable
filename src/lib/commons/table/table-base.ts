@@ -2,6 +2,9 @@ import {TableHeader} from '../models/table-header';
 import {EventEmitter} from '@angular/core';
 
 export class TableBase {
+    // Init
+    public afterTableInit = new EventEmitter();
+
     // Header
     public tableHeaders: TableHeader[] | undefined;
 

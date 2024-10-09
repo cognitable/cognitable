@@ -59,7 +59,6 @@ headers: TableHeader[] = [
     {
         title: 'Status',
         field: 'status',
-        type: 'DROPDOWN',
         renderer: {
             component: StatusDropdownComponent
         }
@@ -77,6 +76,31 @@ this.cognitable?.setTableData(data);
 
 ```typescript
 this.cognitable?.filter(this.searchText);
+```
+
+#### Render Custom Component in Cells
+
+Implement `CellRenderer` in the custom component
+
+```typescript
+export class StatusDropdownComponent implements CellRenderer {
+    // Your logic
+}
+```
+
+And the in headers
+```typescript
+headers: TableHeader[] = [
+    // Other Headers (if any)
+    {
+        title: 'Status',
+        field: 'status',
+        renderer: {
+            component: StatusDropdownComponent
+        }
+    }
+    // Other Headers (if any)
+];
 ```
 
 ## REMEMBER

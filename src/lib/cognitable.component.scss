@@ -21,6 +21,7 @@
   width: 100%;
   background: #F7F9FB;
   border-bottom: 1px solid #CAD4E0;
+  white-space: nowrap;
 }
 
 .cognitable-header-cell-container {
@@ -46,6 +47,16 @@
   width: 100%;
   display: inline-block;
   border-bottom: 1px solid #E1E7EF;
+  position: relative;
+}
+
+.cognitable-action-data-cell {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  z-index: 1;
 }
 
 .cognitable-table-overlay {

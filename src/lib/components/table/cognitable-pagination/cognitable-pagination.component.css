@@ -33,12 +33,12 @@
     border-radius: 4px;
 
     &:hover {
-        background: #4338C9;
+        background: #1e40ae;
         color: #FFFFFF;
     }
 
     &.active {
-        background: #4338C9;
+        background: #1e40ae;
         color: #FFFFFF;
     }
 }

@@ -1,8 +1,8 @@
-<div [style]="'height: 100%; display: flex; align-items: center; ' + header?.styles?.headerCellStyles">
+<div [style]="'height: 100%; display: flex; align-items: center;'">
   <div style="width: 20px; height: 100%; display: flex; align-items: center;">
     <div style="width: 15px; height: 15px;">&nbsp;</div>
   </div>
-  <div class="cognitable-header-cell" (click)="clickAction()">
+  <div class="cognitable-header-cell" [style]="header?.styles?.headerCellStyles" (click)="clickAction()">
     <div class="cognitable-header-cell-content" [style]="header?.styles?.headerCellContentStyles">{{header?.title}}</div>
   </div>
   <div style="width: 20px; height: 100%; display: flex; align-items: center; justify-content: center;">

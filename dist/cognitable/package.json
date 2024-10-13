@@ -1,6 +1,6 @@
 {
   "name": "cognitable",
-  "version": "0.0.17-BETA",
+  "version": "0.0.18",
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0"

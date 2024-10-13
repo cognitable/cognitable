@@ -1,6 +1,6 @@
 {
   "name": "cognitable",
-  "version": "0.0.17-BETA",
+  "version": "0.0.18",
   "scripts": {
     "publish": "ng build cognitable && cd dist/cognitable && npm publish",
     "push": "git add . && git commit -m \"Published\" && git push -u"

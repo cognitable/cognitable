@@ -72,4 +72,9 @@ export interface TableHeader {
     selectedItem?: any,
     containerStyles?: any
   };
+
+  /**
+   * To format how we see the cell data
+   */
+  cellDataFormatter?: (cellData: any, rowData?: any, header?: TableHeader) => any;
 }

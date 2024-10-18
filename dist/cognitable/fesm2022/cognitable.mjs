@@ -198,10 +198,30 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.5", ngImpor
                 type: Input
             }] } });
 
+class CellDataFormatterComponent {
+    cellData;
+    rowData;
+    header;
+    dataToDisplay;
+    ngOnInit() {
+        const formatter = this.header?.cellDataFormatter;
+        if (formatter) {
+            this.dataToDisplay = formatter(this.cellData, this.rowData, this.header);
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: CellDataFormatterComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.5", type: CellDataFormatterComponent, isStandalone: true, selector: "lib-cell-data-formatter", ngImport: i0, template: "{{dataToDisplay}}", styles: [""] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: CellDataFormatterComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'lib-cell-data-formatter', standalone: true, imports: [], template: "{{dataToDisplay}}" }]
+        }] });
+
 class CognitableDataCellComponent {
     injector;
     viewContainerRef;
-    container;
+    componentRenderer;
+    formatterComponent;
     header;
     cellData;
     rowData;
@@ -213,14 +233,34 @@ class CognitableDataCellComponent {
     ngOnInit() {
     }
     ngAfterViewInit() {
-        if (this.container && this.header?.renderer?.component) {
-            this.container.clear();
-            const componentRef = this.container.createComponent(this.header?.renderer?.component);
+        this.initiateRenderer();
+        this.initiateFormatter();
+    }
+    initiateRenderer() {
+        if (this.componentRenderer && this.header?.renderer?.component) {
+            this.componentRenderer.clear();
+            const componentRef = this.componentRenderer.createComponent(this.header?.renderer?.component);
             if (componentRef?.instance) {
                 // @ts-ignore
                 componentRef.instance['tableInstance'] = this.tableInstance;
                 // @ts-ignore
                 componentRef.instance['additionalData'] = this.header?.renderer?.additionalData;
+                // @ts-ignore
+                componentRef.instance['header'] = this.header;
+                // @ts-ignore
+                componentRef.instance['rowData'] = this.rowData;
+                // @ts-ignore
+                componentRef.instance['cellData'] = this.cellData;
+            }
+        }
+    }
+    initiateFormatter() {
+        if (this.formatterComponent && this.header?.cellDataFormatter && !this.header?.renderer?.component) {
+            this.formatterComponent.clear();
+            const componentRef = this.formatterComponent.createComponent(CellDataFormatterComponent);
+            if (componentRef?.instance) {
+                // @ts-ignore
+                componentRef.instance['formatter'] = this.header.cellDataFormatter;
                 // @ts-ignore
                 componentRef.instance['header'] = this.header;
                 // @ts-ignore
@@ -238,16 +278,19 @@ class CognitableDataCellComponent {
         });
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: CognitableDataCellComponent, deps: [{ token: i0.Injector }, { token: i0.ViewContainerRef }], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.5", type: CognitableDataCellComponent, isStandalone: true, selector: "cogintable-data-cell", inputs: { header: "header", cellData: "cellData", rowData: "rowData", tableInstance: "tableInstance" }, viewQueries: [{ propertyName: "container", first: true, predicate: ["componentRenderer"], descendants: true, read: ViewContainerRef }], ngImport: i0, template: "<div style=\"display: flex;\">\n  <div style=\"width: 20px; height: 100%; display: flex; align-items: center;\">\n    <div style=\"width: 15px; height: 15px;\">&nbsp;</div> <!-- Space for Checkbox, Numbers, Etc -->\n  </div>\n\n  <div class=\"cognitable-data-cell\" [style]=\"header?.styles?.cellStyles\">\n    <div class=\"cognitable-data-cell-content\" [style]=\"header?.styles?.cellContentStyles\" (click)=\"click()\">\n        <ng-container *ngIf=\"!header?.renderer?.component\">{{cellData}}</ng-container>\n        <ng-container *ngIf=\"header?.renderer?.component\" #componentRenderer></ng-container>\n    </div>\n  </div>\n\n  <div style=\"width: 20px; height: 100%; display: flex; align-items: center;\">\n    <div style=\"width: 15px; height: 15px;\">&nbsp;</div> <!-- Space to sync with sort in the header, can be used for anything useful -->\n  </div>\n</div>\n", styles: [".cognitable-data-cell{width:150px;padding-top:10px;padding-bottom:10px;display:flex;align-items:center}.cognitable-data-cell-content{width:100%;text-align:left;font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n"], dependencies: [{ kind: "directive", type: NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.5", type: CognitableDataCellComponent, isStandalone: true, selector: "cogintable-data-cell", inputs: { header: "header", cellData: "cellData", rowData: "rowData", tableInstance: "tableInstance" }, viewQueries: [{ propertyName: "componentRenderer", first: true, predicate: ["componentRenderer"], descendants: true, read: ViewContainerRef }, { propertyName: "formatterComponent", first: true, predicate: ["formatterComponent"], descendants: true, read: ViewContainerRef }], ngImport: i0, template: "<div style=\"display: flex;\">\n  <div style=\"width: 20px; height: 100%; display: flex; align-items: center;\">\n    <div style=\"width: 15px; height: 15px;\">&nbsp;</div> <!-- Space for Checkbox, Numbers, Etc -->\n  </div>\n\n  <div class=\"cognitable-data-cell\" [style]=\"header?.styles?.cellStyles\">\n    <div class=\"cognitable-data-cell-content\" [style]=\"header?.styles?.cellContentStyles\" (click)=\"click()\">\n      <ng-container *ngIf=\"!header?.renderer?.component && !header?.cellDataFormatter\">{{cellData}}</ng-container>\n      <ng-container *ngIf=\"header?.renderer?.component\" #componentRenderer></ng-container>\n      <ng-container *ngIf=\"header?.cellDataFormatter && !header?.renderer?.component\" #formatterComponent></ng-container>\n    </div>\n  </div>\n\n  <div style=\"width: 20px; height: 100%; display: flex; align-items: center;\">\n    <div style=\"width: 15px; height: 15px;\">&nbsp;</div> <!-- Space to sync with sort in the header, can be used for anything useful -->\n  </div>\n</div>\n", styles: [".cognitable-data-cell{width:150px;padding-top:10px;padding-bottom:10px;display:flex;align-items:center}.cognitable-data-cell-content{width:100%;text-align:left;font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n"], dependencies: [{ kind: "directive", type: NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: CognitableDataCellComponent, decorators: [{
             type: Component,
             args: [{ selector: 'cogintable-data-cell', standalone: true, imports: [
                         NgIf
-                    ], template: "<div style=\"display: flex;\">\n  <div style=\"width: 20px; height: 100%; display: flex; align-items: center;\">\n    <div style=\"width: 15px; height: 15px;\">&nbsp;</div> <!-- Space for Checkbox, Numbers, Etc -->\n  </div>\n\n  <div class=\"cognitable-data-cell\" [style]=\"header?.styles?.cellStyles\">\n    <div class=\"cognitable-data-cell-content\" [style]=\"header?.styles?.cellContentStyles\" (click)=\"click()\">\n        <ng-container *ngIf=\"!header?.renderer?.component\">{{cellData}}</ng-container>\n        <ng-container *ngIf=\"header?.renderer?.component\" #componentRenderer></ng-container>\n    </div>\n  </div>\n\n  <div style=\"width: 20px; height: 100%; display: flex; align-items: center;\">\n    <div style=\"width: 15px; height: 15px;\">&nbsp;</div> <!-- Space to sync with sort in the header, can be used for anything useful -->\n  </div>\n</div>\n", styles: [".cognitable-data-cell{width:150px;padding-top:10px;padding-bottom:10px;display:flex;align-items:center}.cognitable-data-cell-content{width:100%;text-align:left;font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n"] }]
-        }], ctorParameters: () => [{ type: i0.Injector }, { type: i0.ViewContainerRef }], propDecorators: { container: [{
+                    ], template: "<div style=\"display: flex;\">\n  <div style=\"width: 20px; height: 100%; display: flex; align-items: center;\">\n    <div style=\"width: 15px; height: 15px;\">&nbsp;</div> <!-- Space for Checkbox, Numbers, Etc -->\n  </div>\n\n  <div class=\"cognitable-data-cell\" [style]=\"header?.styles?.cellStyles\">\n    <div class=\"cognitable-data-cell-content\" [style]=\"header?.styles?.cellContentStyles\" (click)=\"click()\">\n      <ng-container *ngIf=\"!header?.renderer?.component && !header?.cellDataFormatter\">{{cellData}}</ng-container>\n      <ng-container *ngIf=\"header?.renderer?.component\" #componentRenderer></ng-container>\n      <ng-container *ngIf=\"header?.cellDataFormatter && !header?.renderer?.component\" #formatterComponent></ng-container>\n    </div>\n  </div>\n\n  <div style=\"width: 20px; height: 100%; display: flex; align-items: center;\">\n    <div style=\"width: 15px; height: 15px;\">&nbsp;</div> <!-- Space to sync with sort in the header, can be used for anything useful -->\n  </div>\n</div>\n", styles: [".cognitable-data-cell{width:150px;padding-top:10px;padding-bottom:10px;display:flex;align-items:center}.cognitable-data-cell-content{width:100%;text-align:left;font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n"] }]
+        }], ctorParameters: () => [{ type: i0.Injector }, { type: i0.ViewContainerRef }], propDecorators: { componentRenderer: [{
                 type: ViewChild,
                 args: ['componentRenderer', { read: ViewContainerRef }]
+            }], formatterComponent: [{
+                type: ViewChild,
+                args: ['formatterComponent', { read: ViewContainerRef }]
             }], header: [{
                 type: Input
             }], cellData: [{

@@ -5,8 +5,9 @@
 
   <div class="cognitable-data-cell" [style]="header?.styles?.cellStyles">
     <div class="cognitable-data-cell-content" [style]="header?.styles?.cellContentStyles" (click)="click()">
-        <ng-container *ngIf="!header?.renderer?.component">{{cellData}}</ng-container>
-        <ng-container *ngIf="header?.renderer?.component" #componentRenderer></ng-container>
+      <ng-container *ngIf="!header?.renderer?.component && !header?.cellDataFormatter">{{cellData}}</ng-container>
+      <ng-container *ngIf="header?.renderer?.component" #componentRenderer></ng-container>
+      <ng-container *ngIf="header?.cellDataFormatter && !header?.renderer?.component" #formatterComponent></ng-container>
     </div>
   </div>
 

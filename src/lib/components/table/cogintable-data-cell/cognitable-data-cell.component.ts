@@ -88,6 +88,11 @@ export class CognitableDataCellComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onCheck(event: any, field: any) {
+    this.rowData['checked'] = this.rowData['checked'] ?? {};
+    this.rowData.checked[field] = event?.target?.checked ?? false;
+  }
+
   click() {
     this.tableInstance?.cellContentClicked.emit({
       header: this.header,

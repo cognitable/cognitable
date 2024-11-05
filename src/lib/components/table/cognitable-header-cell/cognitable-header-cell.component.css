@@ -18,3 +18,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.cognitable-header-checkbox {
+    margin-bottom: 14px;
+    width: 14px;
+    height: 14px;
+}
+
+.cognitable-header-checkbox:focus {
+    outline: none !important;
+    --tw-ring-color: none !important;
+}

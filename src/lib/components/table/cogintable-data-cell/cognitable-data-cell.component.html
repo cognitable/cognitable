@@ -1,6 +1,11 @@
-<div style="display: flex;">
+<div style="display: flex; align-items: center;">
   <div style="width: 20px; height: 100%; display: flex; align-items: center;">
-    <div style="width: 15px; height: 15px;">&nbsp;</div> <!-- Space for Checkbox, Numbers, Etc -->
+    <div style="width: 15px; height: 15px;">
+      <span *ngIf="header?.checkbox?.showInCell">
+        <input type="checkbox" class="cognitable-cell-checkbox" (change)="onCheck($event, header?.field)" [checked]="rowData?.checked && header?.field && rowData?.checked[header?.field ?? '']">
+      </span>
+      <span *ngIf="!header?.checkbox?.showInCell">&nbsp;</span>
+    </div> <!-- Space for Checkbox, Numbers, Etc -->
   </div>
 
   <div class="cognitable-data-cell" [style]="header?.styles?.cellStyles">

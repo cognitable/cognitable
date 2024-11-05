@@ -9,6 +9,7 @@ export declare class CognitableHeaderCellComponent implements OnInit {
     ngOnInit(): void;
     clickAction(): void;
     sort(): void;
+    onCheck(event: any, field: any): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<CognitableHeaderCellComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<CognitableHeaderCellComponent, "cognitable-header-cell", never, { "header": { "alias": "header"; "required": false; }; "tableInstance": { "alias": "tableInstance"; "required": false; }; }, {}, never, never, true, never>;
 }

@@ -17,3 +17,14 @@
     overflow: hidden;
     text-overflow: ellipsis
 }
+
+.cognitable-cell-checkbox {
+    margin-bottom: 14px;
+    width: 14px;
+    height: 14px;
+}
+
+.cognitable-cell-checkbox:focus {
+    outline: none !important;
+    --tw-ring-color: none !important;
+}

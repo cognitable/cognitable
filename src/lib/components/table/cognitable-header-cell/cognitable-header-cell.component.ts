@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {TableHeader} from '../../../commons/models/table-header';
 import {NgIf, NgStyle} from '@angular/common';
 import {TableInstance} from '../../../commons/exportables/table-instance';
+import {data} from 'autoprefixer';
 
 @Component({
   selector: 'cognitable-header-cell',
@@ -42,6 +43,16 @@ export class CognitableHeaderCellComponent implements OnInit {
         this.header.sort.direction = undefined;
       }
       this.tableInstance?.sort(this.header.field, this.header.sort.direction);
+    }
+  }
+
+  onCheck(event: any, field: any) {
+    if (this.tableInstance) {
+      this.tableInstance.tableData = (this.tableInstance?.tableData ?? []).map((data: any) => {
+        data.checked = data.checked ?? {};
+        data.checked[field] = event?.target?.checked ?? false;
+        return data;
+      });
     }
   }
 }

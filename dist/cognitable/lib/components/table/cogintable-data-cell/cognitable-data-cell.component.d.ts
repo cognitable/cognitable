@@ -16,6 +16,7 @@ export declare class CognitableDataCellComponent implements OnInit, AfterViewIni
     ngAfterViewInit(): void;
     initiateRenderer(): void;
     initiateFormatter(): void;
+    onCheck(event: any, field: any): void;
     click(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<CognitableDataCellComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<CognitableDataCellComponent, "cogintable-data-cell", never, { "header": { "alias": "header"; "required": false; }; "cellData": { "alias": "cellData"; "required": false; }; "rowData": { "alias": "rowData"; "required": false; }; "tableInstance": { "alias": "tableInstance"; "required": false; }; }, {}, never, never, true, never>;

@@ -73,4 +73,11 @@ export interface TableHeader {
      * To format how we see the cell data
      */
     cellDataFormatter?: (cellData: any, rowData?: any, header?: TableHeader) => any;
+    /**
+     * To show checkbox in the column
+     */
+    checkbox?: {
+        showInCell?: boolean;
+        showInHeader?: boolean;
+    };
 }

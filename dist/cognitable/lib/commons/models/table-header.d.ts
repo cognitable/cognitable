@@ -79,5 +79,6 @@ export interface TableHeader {
     checkbox?: {
         showInCell?: boolean;
         showInHeader?: boolean;
+        hideIfNoData?: boolean;
     };
 }

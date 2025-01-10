@@ -100,4 +100,6 @@ export class CognitableDataCellComponent implements OnInit, AfterViewInit {
       rowData: this.rowData
     });
   }
+
+  protected readonly window = window;
 }

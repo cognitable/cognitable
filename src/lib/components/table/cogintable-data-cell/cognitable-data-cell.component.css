@@ -15,7 +15,10 @@
     display: block;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
+
+    /* Tooltip */
+    /*position: relative;*/
 }
 
 .cognitable-cell-checkbox {
@@ -27,4 +30,23 @@
 .cognitable-cell-checkbox:focus {
     outline: none !important;
     --tw-ring-color: none !important;
+}
+
+.cognitable-data-cell-content .cognitable-data-cell-content-tooltip {
+    display: none;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: fixed;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.cognitable-data-cell-content:hover .cognitable-data-cell-content-tooltip {
+    display: block;
 }
